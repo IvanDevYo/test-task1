@@ -48,6 +48,7 @@ button {
   height: 34px;
   text-indent: 10px;
   color: #000;
+  resize: none;
   &::placeholder {
     font-family: Roboto, sans-serif;
     color: #BAC9DB;
