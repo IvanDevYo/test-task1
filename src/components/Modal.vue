@@ -3,8 +3,11 @@
     <button class="close--button"></button>
     <div class="modal--content">
       <div class="modal--title">
-        Add new lead
+        <slot name="title">
+          Title!
+        </slot>
       </div>
+      <slot/>
     </div>
   </div>
 </template>
@@ -27,6 +30,7 @@ export default {
     border-radius: 25px;
     filter: drop-shadow(0px 2px 20px rgba(31, 36, 40, 0.24));
     background-color: #fff;
+    padding: 24px 67px 58px 67px;
   }
 
   .close--button {
@@ -36,5 +40,10 @@ export default {
     width: 14px;
     height: 14px;
     background: url("../assets/close.svg");
+  }
+
+  .modal--title {
+    font-weight: 500;
+    font-size: 18px;
   }
 </style>
