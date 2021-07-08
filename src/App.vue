@@ -59,5 +59,8 @@ button {
     border: 1px solid #00D395;
     outline: none;
   }
+  &.error {
+    border: 1px solid #FB6868;
+  }
 }
 </style>

@@ -4,13 +4,13 @@
       <template v-slot:title>
         Enter your name
       </template>
-      <TextInput placeholder="https://goo.gl/maps/id"></TextInput>
+      <TextInput required v-model="name" :errorValidation="errorName" maxlength="50" placeholder="https://goo.gl/maps/id"></TextInput>
     </InputBlock>
     <InputBlock class="default--input_block">
       <template v-slot:title>
         Email
       </template>
-      <TextMultiInput :items="emailItems" @add="addEmailItems" @remove="removeEmailItem"></TextMultiInput>
+      <TextMultiInput required :items="emailItems" :errorValidation="errorEmail" @add="addEmailItems" @remove="removeEmailItem"></TextMultiInput>
     </InputBlock>
     <InputBlock class="default--input_block">
       <template v-slot:title>
@@ -36,7 +36,7 @@
       </template>
       <InputTextArea></InputTextArea>
     </InputBlock>
-    <Button>Save Lead</Button>
+    <Button @click="validateForm">Save Lead</Button>
   </div>
 </template>
 
@@ -46,9 +46,11 @@ import TextInput from './TextInput'
 import TextMultiInput from './TextMultiInput'
 import InputTextArea from './InputTextArea'
 import Button from './Button'
+import validation from "@/mixins/validation"
 
 export default {
   name: "Form",
+  mixins: [validation],
   components: {
     InputBlock,
     TextInput,
@@ -60,9 +62,14 @@ export default {
     return {
       phoneItems: [],
       emailItems: [],
+      name: null,
     }
   },
   methods: {
+    validateForm() {
+      this.validateName()
+      this.validateEmail()
+    },
     removeEmailItem(id) {
       const index = this.emailItems.findIndex(item => item.id === id)
       this.emailItems.splice(index, 1)
