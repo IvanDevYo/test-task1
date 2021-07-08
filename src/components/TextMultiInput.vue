@@ -1,7 +1,7 @@
 <template>
   <div class="multi_input">
     <div class="multi_input--title-block">
-      <input class="default-input" :class="{ 'error': errorValidation }" type="text" v-model="text">
+      <input class="default-input" :class="{ 'error': validation.error }" type="text" v-model="text">
       <button-component
           class="btn-add"
           @click="add"
@@ -31,7 +31,10 @@ export default {
   },
   props: {
     items: Array,
-    errorValidation: Boolean,
+    validation: {
+      type: Object,
+      default() { return {} }
+    },
   },
   data() {
     return {

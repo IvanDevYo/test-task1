@@ -1,7 +1,7 @@
 <template>
   <input
       class="text--input default-input"
-      :class="{ 'error': errorValidation }"
+      :class="{ 'error': validation.error }"
       type="text"
       :value="value"
       :placeholder="placeholder"
@@ -15,7 +15,10 @@ export default {
   props: {
     value: String,
     placeholder: String,
-    errorValidation: Boolean,
+    validation: {
+      type: Object,
+      default() { return {} }
+    },
   }
 }
 </script>

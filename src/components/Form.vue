@@ -4,13 +4,13 @@
       <template v-slot:title>
         Enter your name
       </template>
-      <TextInput required v-model="name" :errorValidation="errorName" maxlength="50" placeholder="https://goo.gl/maps/id"></TextInput>
+      <TextInput required v-model="name" :validation="validation.name" maxlength="50" placeholder="https://goo.gl/maps/id"></TextInput>
     </InputBlock>
     <InputBlock class="default--input_block">
       <template v-slot:title>
         Email
       </template>
-      <TextMultiInput required :items="emailItems" :errorValidation="errorEmail" @add="addEmailItems" @remove="removeEmailItem"></TextMultiInput>
+      <TextMultiInput required :items="emailItems" :validation="validation.email" @add="addEmailItems" @remove="removeEmailItem"></TextMultiInput>
     </InputBlock>
     <InputBlock class="default--input_block">
       <template v-slot:title>
@@ -75,6 +75,11 @@ export default {
       this.emailItems.splice(index, 1)
     },
     addEmailItems(item) {
+      if (!this.isEmailValid(item.text)) {
+        this.validation.email.error = true
+        this.validation.email.message = 'Enter valid email'
+        return
+      }
       this.emailItems.push(item)
     },
     addPhoneItems(item) {
